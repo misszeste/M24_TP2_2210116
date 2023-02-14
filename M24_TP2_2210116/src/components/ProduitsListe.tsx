@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IonButton, IonCard, IonCardTitle, IonContent, IonIcon, IonImg, IonItem, IonLabel, IonList, IonText, IonTitle } from "@ionic/react";
 import { cartOutline, trashOutline } from "ionicons/icons";
 
+// Importation du css relié a la page 
 import './ProduitsListe.css';
 
 
@@ -28,7 +29,7 @@ const ProduitsListe: React.FC = () => {
     },[]);
 
     
-    {/* fonction btn ajouterPanier */}
+    {/* fonction ajouterPanier */}
     const ajouterPanier = (produit: {id:number, title:string, price: string, description:string, category:string, image:string}) => {
         // console.log("Le produit a été ajouté au panier");
 
@@ -37,12 +38,11 @@ const ProduitsListe: React.FC = () => {
         setPanier([...panier,produit]);
         }else{
             // Pourrait avoir un compteur et incrémenté ici
-            alert('Le produit est déjà dans le panier')
+            alert('Ce produit est déjà dans le panier')
         }
     }  
     
-
-    {/* fonction btn viderPanier */}
+    {/* fonction viderPanier completement */}
     const viderPanier = () => {
         setPanier([]);
     }
@@ -51,7 +51,9 @@ const ProduitsListe: React.FC = () => {
     {/* fonction enleverPanierItem  */}
     const enleverPanierItem = ( produitId: number) => {
         // Enlever un item du panier
-        setPanier([]);
+        if(panier.length > 0){
+            setPanier( panier.filter(item => item.id !== produitId));
+        }
     }
 
     {/* fonction calcul total prix de la facture */}
@@ -60,7 +62,7 @@ const ProduitsListe: React.FC = () => {
     return(
         <IonContent>
             {/* Liste d'item dans le panier */}
-            <IonList>
+            <IonList color="dark">
              
 
                 {/* panier .map */}
@@ -73,7 +75,7 @@ const ProduitsListe: React.FC = () => {
                     </IonItem>
                 ))}
 
-            <IonTitle>
+                <IonTitle >
                     <IonItem>
                         <IonIcon slot="start" icon={cartOutline}></IonIcon>
                         <IonLabel slot="start">{panierTotal > 0 ? "Total: " +  panierTotal.toFixed(2) + "$" : ""}</IonLabel>
@@ -84,17 +86,17 @@ const ProduitsListe: React.FC = () => {
             </IonList>
             <br/>
             <IonList>
-                <IonTitle >Produits</IonTitle>
+                <IonTitle className="panier-titre">Liste des produits disponibles </IonTitle>
                 {/* .map */}
                 {produits.map((produit,index)=> (
-                    <IonCard key={index}>
+                    <IonCard className="produit-card" key={index}>
                         <IonCardTitle>{produit.title}</IonCardTitle>
                         <p> Catégorie: {produit.category}</p>
-                        <IonImg src={produit.image}/>
+                        <IonImg className="produit-img" src={produit.image}/>
                         <p>Description : {produit.description}</p>
                         <IonLabel>Prix : {(produit.price).toFixed(2)} $ </IonLabel> <br/>
                      
-                        <IonButton onClick={() => ajouterPanier(produit)}> Ajouter au panier </IonButton>
+                        <IonButton className="btnAjouter" onClick={() => ajouterPanier(produit)}> Ajouter au panier </IonButton>
                     </IonCard>
                 ))}                
             </IonList>

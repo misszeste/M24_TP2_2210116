@@ -1,5 +1,5 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ProduitsListe';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import ProduitsListe from '../components/ProduitsListe';
 import './Home.css';
 
 
@@ -8,11 +8,12 @@ import './Home.css';
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        
+      <IonHeader>        
         <IonToolbar color="secondary">
           {/* <IonIcon slot='start' icon={cart}></IonIcon> */}
           <IonTitle>Ma Boutique Mobile</IonTitle>
+          <IonButton slot="end" color="success" routerLink='/localstorage1'>LS1</IonButton>
+          <IonButton slot="end" color="success" routerLink='/todos'>ToDos</IonButton>
         </IonToolbar >
       </IonHeader>
       <IonContent fullscreen>
@@ -24,7 +25,8 @@ const Home: React.FC = () => {
             </IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
+        {/* Appel du component */}
+        <ProduitsListe />
       </IonContent>
     </IonPage>
   );

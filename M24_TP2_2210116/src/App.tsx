@@ -21,6 +21,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import LocalStorage1 from './pages/LocalStorage1';
+import ToDos from './pages/ToDos';
 
 setupIonicReact();
 
@@ -30,6 +32,12 @@ const App: React.FC = () => (
       <IonRouterOutlet>
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/localstorage1">
+          <LocalStorage1 />
+        </Route>
+        <Route exact path="/todos">
+          <ToDos />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />

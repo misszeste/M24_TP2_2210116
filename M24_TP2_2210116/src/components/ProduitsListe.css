@@ -1,0 +1,47 @@
+.produit-img{
+    height: 25%;
+    width: 25%;
+    
+}
+.panier-titre{
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 25px;
+    /* 25px */
+}
+
+.produit-card{
+    padding: 35px;
+}
+
+p{
+    word-wrap: break-word;
+    width: auto;
+}
+.btnAjouter{
+    padding-top: 10px;
+}
+
+
+/* Section LS1 */
+
+.localStorage{
+    padding: 30px;
+}
+
+.inputLs1{
+    padding-top: 10px;
+}
+
+.btnEnregistrerLs1{
+    padding-top: 10px;
+}
+
+.btnChargerLs1{
+    padding-top: 10px;
+}
+.btnViderLs1{
+    padding-top: 10px;
+}
+
+/* Section ToDos */
