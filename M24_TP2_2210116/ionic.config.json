@@ -1,0 +1,7 @@
+{
+  "name": "M24_TP2_2210116",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
