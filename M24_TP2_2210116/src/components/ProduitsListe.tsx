@@ -26,16 +26,29 @@ const ProduitsListe: React.FC = () => {
             setProduits(data);
         }
         fetchData();    
+
+        //Localstorage
+        const produitConteneur = localStorage.getItem("panier")
+
+        if(produitConteneur){
+            setPanier(JSON.parse(produitConteneur));
+        }
+
+
+
     },[]);
 
     
     {/* fonction ajouterPanier */}
     const ajouterPanier = (produit: {id:number, title:string, price: string, description:string, category:string, image:string}) => {
-        // console.log("Le produit a été ajouté au panier");
+    
 
         if(!panier.includes(produit)){
+
         // ... veux dire tout ce qui est dans le panier
         setPanier([...panier,produit]);
+        //LocalStorage
+        localStorage.setItem("panier", JSON.stringify([...panier, produit]));
         }else{
             // Pourrait avoir un compteur et incrémenté ici
             alert('Ce produit est déjà dans le panier')
@@ -45,14 +58,21 @@ const ProduitsListe: React.FC = () => {
     {/* fonction viderPanier completement */}
     const viderPanier = () => {
         setPanier([]);
+        //localStorage
+        localStorage.setItem("panier", "");
     }
 
 
     {/* fonction enleverPanierItem  */}
-    const enleverPanierItem = ( produitId: number) => {
+    const enleverPanierItem = ( index: number) => {
         // Enlever un item du panier
         if(panier.length > 0){
-            setPanier( panier.filter(item => item.id !== produitId));
+            setPanier( panier.filter(item => item.id !== index));
+             //localStorage
+            const panierMaj = [...panier];
+            panierMaj.splice(index, 1);
+            setPanier(panierMaj);
+            localStorage.setItem("panier", JSON.stringify(panierMaj));
         }
     }
 
@@ -70,7 +90,7 @@ const ProduitsListe: React.FC = () => {
                     <IonItem color="warning" key={index}>
                         <IonLabel>{produit.title}</IonLabel>
                         <IonLabel slot="end">{parseFloat(produit.price).toFixed(2)} $ </IonLabel>
-                        <IonIcon slot="end" icon={trashOutline} onClick={() => enleverPanierItem(produit.id)}></IonIcon>               
+                        <IonIcon slot="end" icon={trashOutline} onClick={() => enleverPanierItem(index)}></IonIcon>               
 
                     </IonItem>
                 ))}
